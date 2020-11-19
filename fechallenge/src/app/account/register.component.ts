@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private accountService: AccountService        
+        private accountService: AccountService
     ) { }
 
     ngOnInit() {
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
     get f() { return this.form.controls; }
 
     onSubmit() {
-        this.submitted = true;        
+        this.submitted = true;
 
         // stop here if form is invalid
         if (this.form.invalid) {

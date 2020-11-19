@@ -2,27 +2,61 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './helpers/auth.guard';
 import { HomeComponent } from './home/home.component';
-import { LayoutComponent } from './account/layout.component';
+import { AccountLayoutComponent } from './account/layout.component';
 import { LoginComponent } from './account/login.component';
 import { RegisterComponent } from './account/register.component';
+import { UserLayoutComponent } from './users/layout.component';
+import { ListComponent } from './users/list.component';
+import { AddEditComponent } from './users/add-edit.component';
 
 const routes: Routes = [
-    { 
-        path: 'home', 
-        component: HomeComponent, 
-        canActivate: [AuthGuard] 
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'home'
     },
     {
-        path: 'account', component: LayoutComponent,
+        path: 'home',
+        pathMatch: 'full',
+        component: HomeComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'account',
+        component: AccountLayoutComponent,
         children: [
-            { path: 'login', component: LoginComponent },
-            { path: 'register', component: RegisterComponent }
+            {
+                path: 'login',
+                component: LoginComponent
+            },
+            {
+                path: 'register',
+                component: RegisterComponent
+            }
+        ]
+    },
+    {
+        path: 'users',
+        component: UserLayoutComponent,
+        children: [
+            {
+                path: '',
+                component: ListComponent
+            },
+            {
+                path: 'add',
+                component: AddEditComponent
+            },
+            {
+                path: 'edit/:id',
+                component: AddEditComponent
+            }
         ]
     }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }
