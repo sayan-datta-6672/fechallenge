@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AuthGuard } from './helpers/auth.guard';
@@ -14,6 +14,7 @@ import { RegisterComponent } from './account/register.component';
 import { UserLayoutComponent } from './users/layout.component';
 import { ListComponent } from './users/list.component';
 import { AddEditComponent } from './users/add-edit.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -24,13 +25,15 @@ import { AddEditComponent } from './users/add-edit.component';
     RegisterComponent,
     UserLayoutComponent,
     ListComponent,
-    AddEditComponent
+    AddEditComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     NgxPaginationModule
   ],

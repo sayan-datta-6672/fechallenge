@@ -1,5 +1,12 @@
 <h1>Users</h1>
 <a routerLink="add" class="btn btn-sm btn-success mb-2">Add User</a>
+<div class="form-group">
+    <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Filter Users" [(ngModel)]="form.filterusers">
+    </div>
+</div>
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -11,19 +18,21 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let user of users">
+        <tr *ngFor="let user of users | paginate: { itemsPerPage: 4, currentPage: p } | filter : form.filterusers">
             <td><img src="{{user.avatar}}" alt="{{user.first_name}} {{user.last_name}}"></td>
             <td>{{user.first_name}}</td>
             <td>{{user.last_name}}</td>
             <td>{{user.email}}</td>
             <td style="white-space: nowrap">
                 <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
-                <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
+                <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user"
+                    [disabled]="user.isDeleting">
                     <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
                     <span *ngIf="!user.isDeleting">Delete</span>
                 </button>
             </td>
         </tr>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
         <tr *ngIf="users == null">
             <td colspan="4" class="text-center">
                 <span class="spinner-border spinner-border-lg align-center"></span>
