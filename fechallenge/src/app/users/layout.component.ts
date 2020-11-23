@@ -19,8 +19,4 @@ export class UserLayoutComponent {
             this.router.navigate(['/account/login']);
         }
     }
-
-    logout() {
-        this.accountService.logout();
-    }
 }
