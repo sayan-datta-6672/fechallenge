@@ -16,7 +16,6 @@ import { UserLayoutComponent } from './users/layout.component';
 import { ListComponent } from './users/list.component';
 import { AddEditComponent } from './users/add-edit.component';
 import { FilterPipe } from './pipes/filter.pipe';
-import { ErrorInterceptor } from './helpers/error.interceptor';
 import { AlertComponent } from './components/alert.component';
 import { MatSortModule } from '@angular/material/sort';
 import { NotfoundComponent } from './notfound/notfound.component';
@@ -47,8 +46,7 @@ import { NotfoundComponent } from './notfound/notfound.component';
     MatSortModule
   ],
   providers: [
-    AuthGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
