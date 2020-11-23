@@ -28,11 +28,10 @@ export class ListComponent implements OnInit {
         });
         
         this.accountService.getAll()
-            .pipe(map(function (users: any) {
+            .pipe(map(function (users: any) {                
                 return users.data;
             }))
-            .subscribe(users => this.users = this.sortedData = users);
-        this.loader = false;
+            .subscribe(users => {this.users = this.sortedData = users; this.loader = false;});
     }
 
     deleteUser(id: string) {

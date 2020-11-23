@@ -22,7 +22,7 @@
             <ng-container
                 *ngFor="let user of sortedData | paginate: { itemsPerPage: 4, currentPage: p } | filter : filterusers">
                 <tr>
-                    <td><img src="{{user.avatar}}"></td>
+                    <td><img src="{{user.avatar}}" onerror="this.src='../assets/images/placeholder.png';" width="30px"></td>
                     <td>{{user.first_name}}</td>
                     <td>{{user.last_name}}</td>
                     <td>{{user.email}}</td>
@@ -42,17 +42,17 @@
             </ng-container>
         </ng-container>
         <tr *ngIf="loader">
-            <td colspan="4" class="text-center">
+            <td colspan="6" class="text-center">
                 <span class="spinner-border spinner-border-lg align-center"></span>
             </td>
         </tr>
-        <tr *ngIf="!sortedData">
-            <td colspan="4" class="text-center">
+        <tr *ngIf="!sortedData && !loader">
+            <td colspan="6" class="text-center">
                 No users found.
             </td>
-        </tr>
-        <div style="text-align: center;">
-            <pagination-controls *ngIf="sortedData" (pageChange)="p = $event"></pagination-controls>
-        </div>
-    </tbody>
+        </tr>        
+    </tbody>    
 </table>
+<div style="text-align: center;">
+    <pagination-controls *ngIf="sortedData" (pageChange)="p = $event"></pagination-controls>
+</div>
