@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AuthGuard } from './helpers/auth.guard';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +16,10 @@ import { UserLayoutComponent } from './users/layout.component';
 import { ListComponent } from './users/list.component';
 import { AddEditComponent } from './users/add-edit.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { ErrorInterceptor } from './helpers/error.interceptor';
+import { AlertComponent } from './components/alert.component';
+import { MatSortModule } from '@angular/material/sort';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -26,18 +31,25 @@ import { FilterPipe } from './pipes/filter.pipe';
     UserLayoutComponent,
     ListComponent,
     AddEditComponent,
-    FilterPipe
+    FilterPipe,
+    AlertComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatSortModule
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

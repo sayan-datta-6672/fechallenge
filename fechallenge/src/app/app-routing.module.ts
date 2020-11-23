@@ -8,12 +8,13 @@ import { RegisterComponent } from './account/register.component';
 import { UserLayoutComponent } from './users/layout.component';
 import { ListComponent } from './users/list.component';
 import { AddEditComponent } from './users/add-edit.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'home'
+        redirectTo: 'users'
     },
     {
         path: 'home',
@@ -52,6 +53,11 @@ const routes: Routes = [
                 component: AddEditComponent
             }
         ]
+    },
+    {
+        path: '**',
+        pathMatch: 'full',
+        component: NotfoundComponent
     }
 ];
 
